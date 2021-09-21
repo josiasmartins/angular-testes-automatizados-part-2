@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'll',
+  selector: 'app-photo-frame',
   templateUrl: './photo-frame.component.html',
   styleUrls: ['./photo-frame.component.scss']
 })
@@ -12,7 +12,7 @@ export class PhotoFrameComponent implements OnInit, OnDestroy {
   @Input() public description = '';
   @Input() public src = '';
   @Input() public likes = 0;
-  private debounceSubject: Subject<void> = new Subject();
+  private debounceSubject: Subject<void> = new Subject(); 
   private unsubscribe: Subject<void> = new Subject();
 
   public ngOnInit(): void {
