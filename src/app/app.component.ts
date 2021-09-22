@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Photo } from './shared/components/photo-board/interfaces/photo';
 import { PhotoBoardService } from './shared/components/photo-board/services/photo-board';
@@ -8,11 +8,14 @@ import { PhotoBoardService } from './shared/components/photo-board/services/phot
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Angular testing';
   public photos$: Observable<Photo[]>;
 
-  constructor(private service: PhotoBoardService) {
-    this.photos$ = service.getPhoto();
+  constructor(private service: PhotoBoardService) {}
+
+  // é bom colocar a inicialização no OnInit
+  ngOnInit(): void {
+    this.photos$ = this.service.getPhoto();
   }
 }

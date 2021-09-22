@@ -1,5 +1,5 @@
 import { identifierModuleUrl } from '@angular/compiler';
-import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { Photo } from './interfaces/photo';
 
 @Component({
@@ -13,19 +13,21 @@ export class PhotoBoardComponent implements OnChanges {
   // array multidimensional
   public rows: any[][] = [];
 
+  // será disparado sempre meu property put mudar
   // verficicar porque depois porque não aceita SimplesChanges
-  public ngOnChanges(changes: any): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.photos) {
       this.rows = this.groupColums(changes.photos.currentValue);
     }
   }
 
-  public groupColums(photos: Photo[]): any[][] {
+
+  private groupColums(photos: Photo[]): any[][] {
     const newRows = [];
     const step = 4;
 
     for (let index = 0; index < photos.length; index += step) {
-      newRows.push(photos.splice(index, index + step));
+      newRows.push(photos.slice(index, index + step));
     }
     return newRows;
   }
